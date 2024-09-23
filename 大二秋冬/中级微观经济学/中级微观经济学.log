@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.9.21)  22 SEP 2024 21:44
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.9.21)  23 SEP 2024 17:53
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1457,57 +1457,55 @@ Chapter 1.
 
 
 ]
-LaTeX Font Info:    Font shape `TU/texgyretermes(0)/b/n' will be
-(Font)              scaled to size 12.0pt on input line 56.
-LaTeX Font Info:    Font shape `TU/texgyretermes(0)/m/n' will be
-(Font)              scaled to size 9.0pt on input line 72.
- [2]
-LaTeX Font Info:    Font shape `TU/texgyretermes(0)/m/n' will be
-(Font)              scaled to size 7.0pt on input line 91.
-LaTeX Font Info:    Font shape `TU/texgyretermes(0)/m/n' will be
-(Font)              scaled to size 5.0pt on input line 91.
- [3] [4] [5] [6] [7] [8] [9] [10] [11] [12] [13]
 Chapter 2.
+[2
+
+]
+LaTeX Font Info:    Font shape `TU/texgyretermes(0)/b/n' will be
+(Font)              scaled to size 12.0pt on input line 76.
+LaTeX Font Info:    Font shape `TU/texgyretermes(0)/m/n' will be
+(Font)              scaled to size 9.0pt on input line 92.
+ [3]
+LaTeX Font Info:    Font shape `TU/texgyretermes(0)/m/n' will be
+(Font)              scaled to size 7.0pt on input line 111.
+LaTeX Font Info:    Font shape `TU/texgyretermes(0)/m/n' will be
+(Font)              scaled to size 5.0pt on input line 111.
+ [4] [5] [6] [7] [8] [9] [10] [11] [12] [13]
+Chapter 3.
 [14
 
 ]
-Chapter 3.
+Chapter 4.
 [15
 
 ]
-Chapter 4.
+Chapter 5.
 [16
 
 ]
-Chapter 5.
+Chapter 6.
 [17
 
 ]
-Chapter 6.
+Chapter 7.
 [18
 
 ] (./中级微观经济学.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
-
-Package rerunfilecheck Warning: File `中级微观经济学.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `中级微观经济学.out':
-(rerunfilecheck)             Before: 0308771FF102AB666A162D2FC9FD96A1;2979
-(rerunfilecheck)             After:  627779DB451C39090EEF38246E0F5017;3096.
+Package rerunfilecheck Info: File `中级微观经济学.out' has not changed.
+(rerunfilecheck)             Checksum: D94A89EF5102A94F4F42B0BEA22D6AD8;4766.
 Package logreq Info: Writing requests to '中级微观经济学.run.xml'.
 \openout1 = `中级微观经济学.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 45712 strings out of 478563
- 980901 string characters out of 5844777
- 1921417 words of memory out of 5000000
- 65070 multiletter control sequences out of 15000+600000
- 517191 words of font info for 96 fonts, out of 8000000 for 9000
+ 45722 strings out of 478563
+ 981006 string characters out of 5844777
+ 1923360 words of memory out of 5000000
+ 65077 multiletter control sequences out of 15000+600000
+ 518118 words of font info for 99 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
  103i,11n,107p,676b,1322s stack positions out of 10000i,1000n,20000p,200000b,200000s
 

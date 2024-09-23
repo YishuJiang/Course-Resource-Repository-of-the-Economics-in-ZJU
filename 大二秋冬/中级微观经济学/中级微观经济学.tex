@@ -41,6 +41,26 @@
 \tableofcontents
 
 \mainmatter
+\chapter{预备数学知识}
+\section{最优化的数学工具:拉格朗日方法与哈密尔顿方法}
+拉格朗日方法(一般用在静态的处理中)
+$$\max_{\mathbf{x}\in\mathbb{R}^n}f(\mathbf{x})$$
+$${\rm s.t.} \ \ g(\mathbf{x})\leq 0$$
+构造拉格朗日函数$L(\mathbf{x};\lambda) = f(\mathbf{x})-\lambda g(x)$(经济学中一般喜欢让$\lambda>0$, 在后面有相应的经济学含义).\\
+一阶条件$FOC$:$\frac{\partial L}{\partial x_i}=0$且$g(\mathbf{x})=0$.当然,解出来的结果并不一定就是最值, 还需要验证二阶条件; 另外, 拉格朗日方法只能给出内点解, 对于二阶条件和角点解的处理, 后续会介绍KKT条件.
+
+哈密尔顿方法(往往和动态最优化相关)
+
+\section{包络定理}
+考虑一个带参数的最优化问题(这里假设$f$性质足够好):
+$$\max_{\mathbf{x}\in\mathbb{R}^n}f(\mathbf{x};a)=:v(a)$$
+记$\mathbf{x}^*\in\arg \max_{\mathbf{x}\in\mathbb{R}^n}f(\mathbf{x};a)$, 两边同时对$a$求导,有:
+$$\frac{{\rm d}v(a)}{{\rm d}a}=\frac{\partial f}{\partial x_1^{*}}\frac{\partial x_{1}^{*}}{\partial a}+\cdots+\frac{\partial f}{\partial x_{n}^{*}}\frac{\partial x_{n}^{*}}{\partial a}+\frac{\partial f}{\partial a}$$
+又根据最值的一阶条件:$\frac{\partial f}{\partial x_i}=0,i=1,2,\cdots,n$, 故有$$\frac{{\rm d}v(a)}{{\rm d}a}=\frac{\partial f}{\partial a}$$
+包络定理在我们只关注参数对最值的影响时, 直接绕开了求解最值的过程, 对比较静态分析的化简有很大帮助.
+\section{凹函数与拟凹函数}
+$f:\mathbb{R}^n\to\mathbb{R}$为凹函数等价于$tf(x_1)+(1-t)f(x_2)\leq f(tx_1+(1-t)x_2),\forall t\in (0,1)$; 一般会假设$f''(\cdot)\leq 0$.
+$f:\mathbb{R}^n\to\mathbb{R}$为拟凹函数等价于$f(tx_1+(1-t)x_2)\geq \min\{f(x_1),f(x_2)\},\forall t\in (0,1)$.
 \chapter{消费者行为}
 对于消费者, 我们要刻画其需求——构成需求需要三个元素:可选择的商品组合、价格以及消费者的收入.
 
@@ -99,10 +119,8 @@ p;
 \section{消费者的最优选择}
 在给定的约束下, 理性的消费者会选择自己最喜欢的商品组合.这样的最优化结果有两种刻画指标 :给定支付能力（收入）, 获取最大效用——效用最大化问题(Utility Maximizing Problem,UMP)；给定效用, 使用最小的支出——支出最小化问题(Expenditure Minimizing Problem,EMP).这两种问题在最优化问题的意义上且具有\textbf{对偶性}.
 
-\subsection{效用最大化问题(UMP)}
-\newpage
-
-\subsection{支出最小化问题(EMP)}
+\subsection{效用最大化问题(UMP)与支出最小化问题(EMP)}
+在理性人和价格接受者的假设下, 消费者的最优选择
 \newpage
 
 \subsection{对偶性: UMP与EMP的联系}
@@ -131,8 +149,21 @@ p;
 \newpage
 
 \chapter{生产者行为}
+\section{技术}
+\section{生产者的最优选择}
+\subsection{利润最大化与利润函数}
+\subsection{成本最小化与成本函数}
+\subsection{对偶}
+\section{短期生产分析}
+\section{长期生产分析}
+
 \chapter{一般均衡理论}
+
 \chapter{博弈论基础}
+
 \chapter{市场结构分析}
+
 \chapter{市场失灵}
+\section{公共物品}
+\section{外部性}
 \end{document}
