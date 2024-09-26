@@ -1,0 +1,107 @@
+\chapter{概率空间}
+在讨论概率空间之前,首先我们需要用对集合的运算刻画事件——在实际情况中往往因为信息问题,我们只能知道其中一部分事件的行为,而需要刻画所有事件的概率,我们首先需要找到一个能对事件的运算封闭的集合.
+\section{概率的公理化定义}
+\section{概率的连续性}
+类似函数极限$\lim_{n\to\infty}f(x_n)=f(\lim_{n\to\infty}x_n)$,我们不禁要问,概率测度是否也具有这样良好的性质,即允许极限与概率测度换序.
+
+从简单的事件列研究起,由于概率空间中的事件一定是"有界"的($\varnothing \subset A\subset \Omega$),参照数列极限,我们首先考虑单调序列:对于单调增的事件列$\{A_n\}_{n=1}^{\infty}$,有$A_1\subset A_2\subset \cdots$,则有$\bigcup_{i=1}^{\infty}A_i=\lim_{n\to\infty}A_n$;同理,对于单调减的事件列
+$\{B_n\}_{n=1}^{\infty}$,指$B_1\supset B_2\supset \cdots$,则有$\bigcap_{i=1}^{\infty}B_i=\lim_{n\to\infty}B_n$.基于此,我们可以得到:
+\begin{theorem}{概率的上、下连续性}{}
+    对于单调增的事件列$\{A_n\}_{n=1}^{\infty}$,有$\lim_{n\to\infty}\mathbb{P}(A_n)=\mathbb{P}(\lim_{n\to\infty}A_n)=\mathbb{P}(\cup_{n=1}^{\infty}A_n)$,称\textbf{上连续性}.
+
+    对于单调减的事件列$\{B_n\}_{n=1}^{\infty}$,有$\lim_{n\to\infty}\mathbb{P}(B_n)=\mathbb{P}(\lim_{n\to\infty}B_n)=\mathbb{P}(\cap_{n=1}^{\infty}B_n)$,称\textbf{下连续性}.
+\end{theorem}
+\begin{proof}
+    首先考虑单调增的事件列的情形.我们希望能使用概率的“可列可加性”,因此需要把$\{A_n\}$转化成一列相互不相交的事件列.做如下变换 :
+    $$B_k=A_k-A_{k-1},k=1,2,\cdots;A_0=\varnothing$$
+    则$\{B_k\}$相互不相交且有$\cup_{i=1}^{\infty}{A_i}=\cup_{i=1}^{\infty}B_i$(类似于在Venn图里拆成"一圈一圈的饼").\\
+    故$\mathbb{P}(\cup_{n=1}^{\infty}A_n)=\mathbb{P}(\cup_{n=1}^{\infty}B_n)=\sum_{n=1}^{\infty}\mathbb{P}(B_n)=\sum_{n=1}^{\infty}(\mathbb{P}(A_{n})-\mathbb{P}(A_{n-1}))=\lim_{n\to\infty}\mathbb{P}(A_n)$.\\
+    而对于单调减的事件列,只需要取单调增情形时的余集,即可套用上面的过程得到结论.
+\end{proof}
+
+现在考虑一般的事件列$\{A_n\}$,在没有单调性的情形下,再借鉴数列极限中的上下极限的概念,我们定义事件列的上下极限.
+\begin{definition}{事件列的上下极限}{}
+    对于事件列$A_1,A_2,\cdots$
+    设$\left\{\begin{aligned}C_n=\bigcup_{j=n}^{\infty}A_j\\D_n=\bigcap_{j=n}^{\infty}A_j\end{aligned}\right.$易知$C_n$单调递减,$D_n$单调递增,则极限存在.
+   $$\lim_{n\to\infty}C_n=\bigcap_{n=1}^{\infty}\bigcup_{j=n}^{\infty}A_j=:\overline{\lim}_{n\to \infty}A_n(\sup_{n\geq 1}\inf_{m\geq n}A_m)$$ 
+   $$\lim_{n\to\infty}D_n=\bigcup_{n=1}^{\infty}\bigcap_{j=n}^{\infty}A_j=:\underline{\lim}_{n\to\infty}A_n(\inf_{n\geq 1}\inf_{m\geq n}A_n)$$
+\end{definition}
+从定义中,可以看出:下极限是上极限的子集,即$\underline{\lim}_{n\to\infty}A_n\subset \overline{\lim}_{n\to \infty}A_n$.于是可以定义 :$\lim_{n\to\infty}A_n$存在当且仅当$\underline{\lim}_{n\to\infty}A_n=\overline{\lim}_{n\to \infty}A_n$\\
+更进一步地理解,可以发现$\overline{\lim}_{n\to \infty}A_n$发生当且仅当有无穷个$A_j$发生,故而也被记作$\{A_n\ i.o.\}$(infinitely often);$\underline{\lim}_{n\to\infty}A_n$发生当且仅当最多有限个$A_j$不发生.
+
+在此基础上,我们证明概率测度的连续性:$\exists\lim_{n\to\infty}A_n\Rightarrow\lim_{n\to\infty}\mathbb{P}(A_n)=\mathbb{P}(\lim_{n\to\infty}A_n)$.
+\begin{lemma}{Fatou引理}{}
+    $$\mathbb{P}(\lim_{n\to\infty}\inf A_n)=\mathbb{P}(\cup_{n=1}^{\infty}\cap_{m=n}^{\infty}A_m)=\lim_{n\to\infty}\mathbb{P}(\cap_{m=n}^{\infty}A_m)\leq\lim_{n\to\infty}\inf \mathbb{P}(A_n)$$
+    $$\mathbb{P}(\lim_{n\to\infty}\sup A_n)=\mathbb{P}(\cap_{n=1}^{\infty}\cup_{m=n}^{\infty}A_m)=\lim_{n\to\infty}\mathbb{P}(\cup_{m=n}^{\infty}A_m)\geq\lim_{n\to\infty}\sup \mathbb{P}(A_n)$$
+\end{lemma}
+\noindent 要使$\lim_{n\to\infty}A_n$存在,则有$\lim_{n\to\infty}\inf A_n=\lim_{n\to\infty}\sup A_n=\lim_{n\to\infty}A_n$.由夹逼定理知$\lim_{n\to\infty}\mathbb{P}(A_n)=\mathbb{P}(\lim_{n\to\infty}A_n)$即证明了概率测度的连续性.
+
+更进一步地,可以证明,概率测度的“可列可加性”等价于“有限可加性+连续性”.
+\begin{proposition}
+    设$\mathbb{P}:\mathcal{F}\to[0,1]$满足有限可加性,且对$\{A_n\}\subset \mathcal{F},A_n\searrow \varnothing$有$\mathbb{P}(A_n)\to 0$.
+    则$\mathbb{P}$满足可列可加性.
+\end{proposition}
+\begin{proof}
+    考虑事件列$\{B_n\}_{n=1}^{\infty}$满足$B_i\cap B_j=\varnothing,\forall i,j$且$B_n\searrow $.\\
+    令$B=\sum_{i=1}^{\infty}B_i=\sum_{i=1}^{n}B_i+\sum_{i=n+1}^{\infty}B_i$,并设$C_n=\sum_{i=n+1}^{\infty}B_i$则$C_n\searrow\varnothing$.\\
+    于是$\mathbb{P}(B)=\mathbb{P}(\sum_{i=1}^{n}B_i)+\mathbb{P}(C_n)\to\mathbb{P}(\sum_{i=1}^{n}B_i)\ as\ n\to\infty$.
+\end{proof}
+\section{Borel-Canteli引理}
+重新回顾一下集合列的上下极限.
+\begin{definition}{事件列的上下极限}{}
+    对于事件列$A_1,A_2,\cdots$
+    设$\left\{\begin{aligned}C_n=\bigcup_{j=n}^{\infty}A_j\\D_n=\bigcap_{j=n}^{\infty}A_j\end{aligned}\right.$易知$C_n$单调递减,$D_n$单调递增,则极限存在.
+   $$\lim_{n\to\infty}C_n=\bigcap_{n=1}^{\infty}\bigcup_{j=n}^{\infty}A_j=:\overline{\lim}_{n\to \infty}A_n$$ 
+   $$\lim_{n\to\infty}D_n=\bigcup_{n=1}^{\infty}\bigcap_{j=n}^{\infty}A_j=:\underline{\lim}_{n\to\infty}A_n$$
+\end{definition}
+
+在定义了事件列上下极限的基础上,引入Borel-Canteli引理.
+\begin{theorem}{Borel-Canteli引理}
+    对于事件列$A_1,A_2,\cdots$\\
+    (1):若$\sum_{j=1}^{\infty}\mathbb{P}(A_j)<\infty$,则$\mathbb{P}(A_n \ i.o.)=0$;\\
+    (2):若事件列中事件相互独立,$\sum_{j=1}^{\infty}\mathbb{P}(A_j)=\infty$,则$\mathbb{P}(A_n \ i.o.)=1$.
+\end{theorem}
+{\kaishu
+\noindent 思路:\\
+(1).$\mathbb{P}(A_n\ i.o.)=\lim_{n\to\infty}\mathbb{P}(\bigcup_{j=n}^{\infty}A_j)$,考虑到条件给的是事件列概率的和,故而我们可以想到通过次可列可加性,将事件列并的概率放缩成概率列的部分和,再通过正项级数收敛的性质进行估计.\\
+(2).$\mathbb{P}(A_n\ i.o.)=\lim_{n\to\infty}\mathbb{P}(\bigcup_{j=n}^{\infty}A_j)$,对$\mathbb{P}(\bigcup_{j=n}^{\infty}A_j)$进行估计,由于要使用到事件相互独立的条件,我们可以通过De-Morgan定律将并改写为交,即得到
+$\mathbb{P}(\bigcup_{j=n}^{\infty}A_j)=\mathbb{P}(\overline{\overline{\bigcup_{j=n}^{\infty}A_j}})=1-\mathbb{P}(\bigcap_{j=n}^{\infty}\overline{A_j})=1-\prod_{j=n}^{\infty}\mathbb{P}(\overline{A_j})=1-\prod_{j=n}^{\infty}(1-\mathbb{P}(A_j))$.
+到此为止,我们用完了事件独立性的条件,接下来的目标就是再进行估计,把概率和的条件用上,就需要把乘积转换成和的形式,考虑如下放缩$1-x\leq {\rm e}^{-x},x\in[0,1]$,于是上式可以改写成一个指数上带求和的形式,从而得到收敛.
+}
+\begin{proof}
+    (1):由$\mathbb{P}(A_n\ i.o.)=\lim_{n\to\infty}\mathbb{P}(\bigcup_{j=n}^{\infty}A_j)$,又$\mathbb{P}(\bigcup_{j=n}^{\infty}A_j)\leq \sum_{j=n}^{\infty}\mathbb{P}(A_j)$,
+    得$\mathbb{P}(A_n\ i.o.)\leq \lim_{n\to\infty}\sum_{j=n}^{\infty}\mathbb{P}(A_j)$.而$\sum_{j=1}^{\infty}\mathbb{P}(A_j)<\infty$,则根据级数收敛的Cauchy准则知$\lim_{j=n}^{\infty}\mathbb{P}(A_j)=0$.
+    故$\mathbb{P}(A_n\ i.o.)=0$.
+
+    (2):由$\mathbb{P}(A_n\ i.o.)=\lim_{n\to\infty}\mathbb{P}(\bigcup_{j=n}^{\infty}A_j)$,又$$\mathbb{P}(\bigcup_{j=n}^{\infty}A_j)=\mathbb{P}(\overline{\overline{\bigcup_{j=n}^{\infty}A_j}})=1-\mathbb{P}(\bigcap_{j=n}^{\infty}\overline{A_j})=1-\prod_{j=n}^{\infty}\mathbb{P}(\overline{A_j})=1-\prod_{j=n}^{\infty}(1-\mathbb{P}(A_j))$$
+    考虑$1-x\leq{\rm e}^{-x},0\leq x\leq 1$,有$\mathbb{P}(\bigcup_{j=n}^{\infty}A_j)\leq 1-\prod_{j=n}^{\infty}{\rm e}^{-\mathbb{P}(A_j)}=1-{\rm e}^{-\sum_{j=n}^{\infty}\mathbb{P}(A_j)}$.
+    由于$\sum_{j=1}^{\infty}\mathbb{P}(A_j)=\infty$,则$-\sum_{j=n}^{\infty}\mathbb{P}(A_j)=-\infty$,故可以得到$\mathbb{P}(\bigcup_{j=n}^{\infty}A_j)=1$,于是有$\mathbb{P}(A_n\ i.o.)=1$.
+\end{proof}
+\noindent 注:
+\begin{enumerate}
+    \item 在事件列中事件是相互独立时,$\mathbb{P}(A_n\ i.o.)$只能取0或1,即对相互独立的事件列,其中有无穷个事件发生的概率要么为0要么为1.这一结论被称为\textbf{独立$0-1$律}.
+    \item 对于独立重复试验(每次发生的概率为$p$),有$\sum_{n=1}^{\infty}\mathbb{P}(A_n)\leq \infty$当且仅当$p=0$.也就是说,\textbf{在独立重复试验中,当事件几乎必然不发生时,无穷次地重复下去几乎必然不会有无穷次事件发生;当事件每次发生的概率不为0时,无论这个概率多么地小,只要无穷次地重复下去几乎必然会有无穷次事件发生.} 
+    \item 对于独立试验(第$n$次发生的概率为$p_n(>0)$,无穷次地做下去),\textbf{事件列中是否有无穷多个事件发生只和$n$充分大时$p_n$的值有关}(这是符合直觉的).然而,直觉所感受不到的是:$p_n=\frac{1}{n}$时,事件列中会有无穷多个事件发生;$p_n=\frac{1}{n^2}$时,则不会有无穷多个事件发生.
+    \item Borel-Canteli引理是强大数定律的基础(参见之后的强大数定律).
+\end{enumerate}
+\section{条件概率、全概率公式、Bayes公式}
+\subsection{条件概率}
+\textbf{条件概率的本质就是对样本空间的限制.}
+\begin{definition}{条件概率}
+\end{definition}
+\subsection{全概率公式与Bayes公式}
+\begin{theorem}{全概率公式}{}
+    事件$\{A_i\}_{i=1}^{n}$互斥, $B\subset \cup_{i=1}^{n}A_i$, 则
+    $$\mathbb{P}(B)=\sum_{i=1}^{n}\mathbb{P}(B\mid A_i)\mathbb{P}(A_i)$$
+\end{theorem}
+证明很简单,$B=\cup_{i=1}^{n}BA_i$再利用概率的可列可加性并用条件概率的乘法公式处理即可.
+
+以下是两个常见的应用.
+\begin{example}{(抽签公平性)}
+    $n$个球,有$m$个黑球,剩下全为白,球除了颜色外没有任何差别. 求证:
+    无放回地依次抽取球, 每一次抽中黑球的概率都是$\frac{m}{n}$.
+\end{example}
+再来一个更加有趣的:赌徒破产模型,同时在这里也会介绍一种在概率论中非常常见的处理方法：\textbf{递推公式法}.
+\begin{example}{(赌徒破产模型)}{}
+    一个人有$a$的本金, 打算再赢$b$元就停止赌博, 设每局$p=\frac{1}{2}$概率赢, 输赢对金钱的影响都是1, 输光后自然地停止赌博, 求输光的概率$p(a)$.
+\end{example}

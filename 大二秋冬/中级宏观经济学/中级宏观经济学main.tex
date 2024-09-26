@@ -1,0 +1,75 @@
+\documentclass[lang=cn,10pt]{elegantbook}
+\usepackage{ctex}
+\title{中级宏观经济学(拔尖班)笔记}
+\subtitle{2024-2025学年秋冬学期}
+
+\author{Yishu Jiang}
+\institute{School of Economics,Zhejiang University}
+\date{\today}
+
+\extrainfo{Talk is cheap,show me your solution!}
+
+\setcounter{tocdepth}{3}
+
+\logo{ZJU.png}
+\cover{Cover.png}
+
+% 本文档命令
+\usepackage{array}
+\newcommand{\ccr}[1]{\makecell{{\color{#1}\rule{1cm}{1cm}}}}
+
+% 修改标题页的橙色带
+% \definecolor{customcolor}{RGB}{32,178,170}
+% \colorlet{coverlinecolor}{customcolor}
+
+\setcounter{tocdepth}{2}
+\begin{document}
+
+\maketitle
+\frontmatter
+\chapter*{前言}
+\markboth{Introduction}{前言}
+{\fangsong 
+    本笔记是2024-2025学年秋冬学期面向经济学拔尖班开设的中级宏观经济学的学习笔记,主要使用的教材为何樟勇《高级宏观经济学》和卢卡斯的《经济动态的递归方法》,授课老师为邬介然.
+    
+    前半学期的内容更偏向于传统的中宏所涉及的模型, 普通班的同学也可以参考; 后半学期的内容更偏向于高宏的内容.
+
+    由于本人初次学习中宏且水平能力有限,笔记中有所疏漏处,恳请指正.
+}
+\newpage
+
+\tableofcontents
+
+\mainmatter
+\part{中宏的简单模型}
+\include{1.1单期代表性行为人模型.tex}
+\chapter{两期动态模型}
+\newpage
+
+\chapter{三期动态模型}
+\newpage
+
+\chapter{无穷期动态模型}
+\newpage
+
+\part{数学工具}
+\chapter{动态规划Dynamic Programing}
+
+\chapter{基本的数值计算方法}
+
+\part{DEGE:动态随机一般均衡}
+\chapter{真实经济周期模型RBC}
+
+\chapter{Banking Model}
+
+\chapter{OLG模型}
+
+\chapter{金融摩擦}
+
+\part{附录}
+\chapter{数学工具}
+\section{哈密尔顿方法}
+\chapter{宏观经济学的微观经济理论基础}
+\section{Arrow-Debru定理}
+\chapter{读书笔记:《宏观经济学史:从凯恩斯到卢卡斯及其后》}
+\end{document}

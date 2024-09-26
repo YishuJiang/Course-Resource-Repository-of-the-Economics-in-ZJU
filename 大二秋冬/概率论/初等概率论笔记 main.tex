@@ -1,0 +1,53 @@
+\documentclass[lang=cn,10pt]{elegantbook}
+\usepackage{ctex}
+\title{初等概率论笔记}
+\subtitle{2024-2025学年秋冬学期}
+
+\author{Yishu Jiang}
+\institute{School of Economics,Zhejiang University}
+\date{\today}
+
+\extrainfo{不要以为抹消过去,重新来过,即可发生什么改变。—— 比企谷八幡}
+
+\setcounter{tocdepth}{3}
+
+\logo{ZJU.png}
+\cover{Cover.jpg}
+
+% 本文档命令
+\usepackage{array}
+\newcommand{\ccr}[1]{\makecell{{\color{#1}\rule{1cm}{1cm}}}}
+
+% 修改标题页的橙色带
+% \definecolor{customcolor}{RGB}{32,178,170}
+% \colorlet{coverlinecolor}{customcolor}
+
+\setcounter{tocdepth}{2}
+\begin{document}
+
+\maketitle
+\frontmatter
+\chapter*{前言}
+\markboth{Introduction}{前言}
+{\fangsong 
+    本笔记是2024-2025学年秋冬学期3.5学分概率论的学习笔记,基于张立新老师上课的讲义整理而成,同时参考了何书元老师的《概率论》、李贤平老师的《概率论基础》、吴昊老师的《概率论(I)》讲义、中科大概率论习题课讲义.
+    目前的基本架构是分成三部分:第一部分侧重于概念的介绍和对为什么引入的解释;第二部分侧重于补充内容的整理;第三部分是习题集.
+    后续如果还有机会的话,会再加入测度论视角的概率论内容.
+
+    由于本人初次学习概率论且水平能力有限,笔记中有所疏漏处,恳请指正.
+}
+\newpage
+\tableofcontents
+
+\mainmatter
+
+\part{初等概率论}
+\include{1.1概率空间.tex}
+\include{1.2随机变量.tex}
+\include{1.3随机向量.tex}
+\include{1.4重要数据特征.tex}
+\include{1.5收敛性与中心极限定理.tex}
+\part{补充内容}
+\part{习题整理(含小测题、历年题)}
+\include{习题集.tex}
+\end{document}

@@ -1,0 +1,46 @@
+\documentclass[lang=cn,10pt]{elegantbook}
+\usepackage{ctex}
+\title{公共经济学(拔尖班)笔记}
+\subtitle{2024-2025学年秋冬学期}
+
+\author{Yishu Jiang}
+\institute{School of Economics,Zhejiang University}
+\date{\today}
+
+\extrainfo{Talk is cheap,show me your solution!}
+
+\setcounter{tocdepth}{3}
+
+\logo{ZJU.png}
+\cover{Cover.png}
+
+% 本文档命令
+\usepackage{array}
+\newcommand{\ccr}[1]{\makecell{{\color{#1}\rule{1cm}{1cm}}}}
+
+% 修改标题页的橙色带
+% \definecolor{customcolor}{RGB}{32,178,170}
+% \colorlet{coverlinecolor}{customcolor}
+
+\setcounter{tocdepth}{2}
+\begin{document}
+
+\maketitle
+\frontmatter
+\chapter*{前言}
+\markboth{Introduction}{前言}
+{\fangsong 
+    本笔记是2024-2025学年秋冬学期面向经济学拔尖班开设的公共经济学学习笔记,主要参考王宇老师的课程讲义和北大光华的公共经济学课程讲义.
+
+    由于本人初次学习且水平能力有限,笔记中有所疏漏处,恳请指正.
+}
+\newpage
+
+\tableofcontents
+
+\mainmatter
+
+\include{1.1导言.tex}
+\include{1.2外部性.tex}
+\include{1.3公共产品.tex}
+\end{document}

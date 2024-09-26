@@ -1,0 +1,119 @@
+\chapter{随机向量}
+本章主要涉及随机向量及其分布,从本质上看,随机向量与随机变量差异不大,只是在处理方式上更加复杂了.
+\section{随机向量}
+\begin{definition}{随机向量}{}
+    已知概率空间$(\Omega,\mathcal{F},\mathbb{P})$,$X_1,\cdots,X_n$为此概率空间上的随机变量,则$\overrightarrow{X}=(X_1,\cdots,X_n)$称为$n$维随机向量.
+\end{definition}
+事实上,随机向量就是对随机变量做了升维处理,由此我们不仅可以处理$X,Y$各自的分布,还可以研究这两个分量之间的联系.
+在本节中,我们的主要目标是将在上一章中随机变量的性质和一些处理方法推广到随机向量上;同时,由于随机向量的结构更加复杂,我们还能得到一些在随机变量中得不到的结论.
+
+在对随机变量的讨论中,我们了解到了分布函数的重要性:它与概率分布相互唯一决定.于是我们也同样从分布函数入手,研究随机向量,类似的,定义随机向量的分布函数如下:
+\begin{definition}{随机向量的联合分布函数}{}
+    $\overrightarrow{X}=(X_1,\cdots,X_n)$为随机向量,则
+    $$F(x_1,\cdots,x_n)=\mathbb{P}(X_1\leq x_1,\cdots,X_n\leq x_n)$$
+\end{definition}
+为了简化处理,我们默认研究的是二维的随机向量$(X,Y)$,更高维的情形类似. 很自然地推广一维情形下的分布函数的性质: 
+\begin{enumerate}
+    \item $0\leq F(x,y)\leq 1$
+    \item $F$分别关于$x,y$为单调递增的右连续函数
+    \item $F(-\infty,y)=0,F(x,-\infty)=0,F(-\infty,-\infty)=0;F(+\infty,+\infty)=1$
+\end{enumerate}
+
+然而,联合分布描述的是多个随机变量混合在一块儿发挥作用时的分布;我们不禁要问: 给定联合分布函数,能否将其中一个或多个随机变量分离出来,单独考察他们的随机分布呢?
+
+考虑联合分布函数$F(x,y)=\mathbb{P}(X\leq x,Y\leq y)$,如果要求$X$的概率分布,那就需要让$Y$在这一联合分布中失去作用,换言之,就是让$Y\leq y$在这儿“不起作用”,
+可以令$y\to +\infty$(相当于对$Y$不做限制$\{Y\in \mathbb{R}\}$),根据概率的连续性:
+$$\lim_{y\to +\infty}\mathbb{P}(X\leq x,Y\leq y)=\mathbb{P}(X\leq x,\bigcup_{y=0}^{+\infty}\{Y\leq y\})=\mathbb{P}(X\leq x)$$
+从而我们引出了边缘分布的定义.
+
+\begin{definition}{随机向量关于某个分量的边缘分布}{}
+    随机向量$\overrightarrow{X}=(X_1,\cdots,X_n)$,$1\leq k\leq n-1$,$F$为联合分布,则$(X_1,\cdots,X_k)$的分布函数
+    $$\lim_{x_{k+1},\cdots,x_n\to +\infty}F(x_1,\cdots,x_k,x_{k+1},\cdots,x_n)$$
+    称为$\overrightarrow{X}$关于$(X_1,\cdots,X_k)$的边缘分布.
+\end{definition}
+
+有了边缘分布的概念之后,我们便可以得到关于随机向量内部各个分量之间独立性的定理,它叙述的是随机向量内部的关系.
+
+\begin{theorem}{随机向量分量的独立性}{}
+    随机向量$(X,Y)$,$X,Y$相互独立的充要条件为联合分布等于关于每个分量的边缘分布的乘积,即
+    $$F(x,y)=F_X(x)F_Y(y)$$
+    其中$F$为联合分布,$F_X(x)$表示关于$X$的边缘分布.
+\end{theorem}
+
+这个定理的证明很简单,用独立性的定义即可.之后还会有很多判定独立性的定理,但\textbf{联合分布与边缘分布的关系}总是与独立性最本质相关的.
+\section{离散型随机向量}
+\begin{definition}{离散型随机变量}{}
+    当$X_1,\cdots,X_n$均为离散型随机变量时,$\overrightarrow{X}=(X_1,\cdots,X_n)$为离散型随机变量.
+\end{definition}
+我们主要关注离散型随机向量的分布列及边缘分布.为了简化,这里讨论的都是二维随机向量$(X,Y)$.
+设$X=x_1,x_2,\cdots;Y=y_1,y_2,\cdots$为这两个随机变量的所有取值,且$\mathbb{P}(X=x_i,Y=y_j)=p_{ij}$.
+则有以下简单性质:
+\begin{enumerate}
+    \item $0\leq p_{ij}\leq 1$;
+    \item $\sum_{i,j}p_{ij}=1$;
+    \item $\mathbb{P}(X=x_i)=\sum_{j}p_{ij},\mathbb{P}(Y=y_j)=\sum_{i}p_{ij}$.
+\end{enumerate}
+
+这里介绍一个常见的离散型随机向量分布:多项分布.
+\begin{definition}{多项分布}{}
+    $A_1,A_2,\cdots,A_r$为完备事件组.现在独立重复试验$n$次,$X_i$表示$A_i$发生的次数,
+    $\mathbb{P}(A_i)=p_i(i=1,2,\cdots,r)$,则$\mathbb{P}(X_1=k_1,\cdots,X_r=k_r)=\binom{n}{k_1\ \ \cdots \ \ k_r} p_1^{k_1}\cdots p_r^{k_r}$,其中$k_i\geq 0,k_1+k_2+\cdots+k_r=n$.
+    $\binom{n}{k_1\ \ \cdots \ \ k_r}=\binom{n}{k_1}\binom{n-k_1}{k_2}\cdots\binom{n-k_1-k_2-\cdots-k_{r-1}}{k_r}$.
+\end{definition}
+
+最后给出一个有关离散型随机向量分量独立性的判据,注意\textbf{只能用在离散型随机向量}上:
+\begin{theorem}{离散型随机向量分量独立性}{}
+    $(X,Y)$为离散型随机向量,则$X$与$Y$独立的充要条件为
+    $$\mathbb{P}(X=x_i,Y=y_j)=\mathbb{P}(X=x_i)\mathbb{P}(Y=y_j),\forall i,j$$
+\end{theorem}
+\newpage
+\section{连续型随机向量}
+\begin{definition}{连续型随机向量}{}
+    对于随机向量$\overrightarrow{X}=(X_1,\cdots,X_n)$,若存在$\mathbb{R}^n$上的非负可积函数$f$,满足对
+    $\forall D=\{(x_1,\cdots,x_n):a_i\leq x_i\leq b_i,a_i,b_i\in\mathbb{R}\}$,都有
+    $$\mathbb{P}(\overrightarrow{X}\in D)=\int_D f(x_1,\cdots,x_n) {\rm d}x_1\cdots {\rm d}x_n$$
+    则称$\overrightarrow{X}$为连续型随机向量,$f$为联合密度.
+\end{definition}
+
+很自然的,有一个问题:问什么不像离散型随机向量一样,用每个分量均为连续的随机变量来定义连续型随机向量呢?先暂时保留这个问题,在之后我们会看到这样定义是错误的.
+在此之前,先来关注一下随机向量联合密度函数的一些性质,同样推广一维的情形,可以得到:
+\begin{enumerate}
+    \item $\int_{\mathbb{R}^n}f(x_1,\cdots,x_n){\rm d}x_1\cdots{\rm d}x_n=1$;
+    \item 联合密度函数不唯一.(修改一个零测集上的取值不影响$n$重积分的结果)
+    \item 若$f,g$都是$\overrightarrow{X}$的联合密度,且均在$\overrightarrow{x}=(x_1,\cdots,x_n)$处连续,则必有$f(\overrightarrow{x})=g(\overrightarrow{x})$
+\end{enumerate}
+关于连续型随机向量的边缘密度,事实上我们给出边缘分布函数定义时给出的推导思路大同小异.
+
+这里不加证明的给出需要用到的Fubini定理.
+\begin{theorem}{Fubini定理}{}
+    若$f(x_1,x_2,\cdots,x_n)$为非负函数或者在$D\subset\mathbb{R}^n$上绝对可积的函数,则$f$在$D$上的$n$重积分可以任意交换$n$次积分的次序.
+\end{theorem}
+联系之前对边缘分布的定义,采取同样的方法.\\
+$\overrightarrow{X}=(X_1,\cdots,X_n)$为连续型随机向量,$f$为联合密度,$\forall 1\leq k\leq n-1,D_k=\{(x_1,\cdots,x_k):a_i<x_i<b_i,i=1,2,\cdots,k\}$,则
+$\mathbb{P}((X_1,\cdots,X_k)\in D_k)=\int_{D_k\times\mathbb{R}^n}f(x_1,\cdots,x_n){\rm d}x_1\cdots{\rm d}x_n$.由Fubini定理,\\
+原式$=\int_{D_k}\left({\int_{\mathbb{R}^{n-k}}}f(x_1,\cdots,x_k,x_{k+1},\cdots,x_n){\rm d}x_{k+1}\cdots{\rm d}x_n\right){\rm d}x_1\cdots{\rm d}x_k$
+\begin{definition}{随机向量的边缘分布函数}{}
+    随机向量$\overrightarrow{X}=(X_1,\cdots,X_n)$关于分量$(X_1,\cdots,X_k)$的边缘密度为
+    $$\int_{\mathbb{R}^{n-k}}f(x_1,\cdots,x_k,x_{k+1},\cdots,x_n){\rm d}x_{k+1}\cdots{\rm d}x_n$$
+\end{definition}
+
+特别解释一下为何密度函数叫“密度”?可以这样理解:\textbf{某点处的密度函数的值代表了这个点附近单位体积中取值的概率}.\\
+设$f$为$\overrightarrow{X}=(X_1,\cdots,X_n)$的联合密度,且在$\overrightarrow{x_0}=(x_1^0,\cdots,x_n^0)$连续.\\
+取充分小的$(\Delta x_1,\cdots,\Delta x_n)$,考虑$\overrightarrow{X}$在$\overrightarrow{x_0}$附近的单位体积中的概率
+$$\frac{\mathbb{P}(x^0_1-\frac{\Delta x_1}{2}<X_1\leq x^0_1+\frac{\Delta x_1}{2},\cdots,x^0_n-\frac{\Delta x_n}{2}<X_1\leq x^0_n+\frac{\Delta x_n}{2})}{\Delta x_1\Delta x_2\cdots\Delta x_n}
+=\frac{\int_{x_1^0-\frac{\Delta x_1}{2}}^{x_1^0+\frac{\Delta x_1}{2}}\cdots\int_{x_n^0-\frac{\Delta x_n}{2}}^{x_n^0+\frac{\Delta x_n}{2}}f(x_1,\cdots,x_n){\rm d}x_1\cdots{\rm d}x_n}{\Delta x_1\Delta x_2\cdots\Delta x_n}$$
+由积分中值定理,$\exists \xi_i\in \left[x_i^0-\frac{\Delta x_i}{2},x_i^0+\frac{\Delta x_i}{2}\right],i=1,2,\cdots,n$,使得
+$$\int_{x_1^0-\frac{\Delta x_1}{2}}^{x_1^0+\frac{\Delta x_1}{2}}\cdots\int_{x_n^0-\frac{\Delta x_n}{2}}^{x_n^0+\frac{\Delta x_n}{2}}f(x_1,\cdots,x_n){\rm d}x_1\cdots{\rm d}x_n=f(\xi_1,\cdots,\xi_n)\Delta x_1\cdots\Delta x_n$$
+故$\frac{\mathbb{P}(x^0_1-\frac{\Delta x_1}{2}<X_1\leq x^0_1+\frac{\Delta x_1}{2},\cdots,x^0_n-\frac{\Delta x_n}{2}<X_1\leq x^0_n+\frac{\Delta x_n}{2})}{\Delta x_1\Delta x_2\cdots\Delta x_n}=f(\xi_1,\cdots,\xi_n)$.
+\\再根据$f$在$\overrightarrow{x_0}$处的连续性,易知$f(\xi_1,\cdots,\xi_n)\to f(\overrightarrow{x_0})$.
+
+再讨论联合分布与联合密度之间的关系.同样是对一维情形的推广,但需要注意新增的细节.出于简化,讨论二维随机向量$(X,Y)$.
+
+特别注意:这里多出了\textbf{约束条件}$\int_{\mathbb{R}^2}f(x,y){\rm d}x{\rm d}y=1$.接下来用反例说明这是\textbf{必要的}.
+
+\begin{example}
+\end{example}
+
+\begin{theorem}{连续型随机向量的分量间的独立性}{}
+    设$X$有边缘密度函数$f_X(x)$,$Y$有边缘密度函数$f_Y(y)$,则$X,Y$独立的充要条件是$f_X(x)f_Y(y)$为$(X,Y)$的联合密度.
+\end{theorem}
