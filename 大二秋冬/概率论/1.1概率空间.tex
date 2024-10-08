@@ -105,3 +105,13 @@ $\mathbb{P}(\bigcup_{j=n}^{\infty}A_j)=\mathbb{P}(\overline{\overline{\bigcup_{j
 \begin{example}{(赌徒破产模型)}{}
     一个人有$a$的本金, 打算再赢$b$元就停止赌博, 设每局$p=\frac{1}{2}$概率赢, 输赢对金钱的影响都是1, 输光后自然地停止赌博, 求输光的概率$p(a)$.
 \end{example}
+\subsection{独立性}
+首先介绍事件的独立性. 对于两个事件独立, 也就是意味这一个事件的发生与否对另一个事件的发生与否没有任何影响, 很自然地, 
+可以用条件概率来刻画这一性质:$\mathbb{P}(A\mid B)=\mathbb{P}(A)$, 但这里有一个细节需要处理, 条件概率要求$\mathbb{P}(B)>0$, 故而我们用乘法公式来改进定义.
+\begin{definition}{两事件的独立性}{}
+    对于事件$A,B$, 若$\mathbb{P}(AB)=\mathbb{P}(A)\mathbb{P}(B)$, 则称$A,B$独立.
+\end{definition}
+\begin{example}
+    (分支过程). 设某种单性繁殖的生物群(如果是两性繁殖的生物,只考虑男性及其男性的后代)中每个个体进行独立繁衍, 每个个体产生$k$个下一代个体的概率为$p_k,k=0,1,2,\cdots$.
+    记$m=\sum_{k=1}^{\infty}kp_k$. 设该生物群开始时(即第0代)只有一个个体. 证明:如果$m\leq 1,p_1<1$, 则这一生物群灭绝(即到某一代时个体数为0)的概率为1.
+\end{example}

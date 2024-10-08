@@ -136,7 +136,21 @@ $$\int\int_{\mathbb{R}^2}xf(x,y){\rm d}x{\rm d}y$$
 \begin{theorem}{Chebyshev不等式}{}
     $\forall c>0$,$\mathbb{P}(|X-\mathbb{E}X|\geq c)\leq\frac{VarX}{c^2}$
 \end{theorem}
-
+接着再来看一个更加复杂一点的例子.
+\begin{example}
+    \textbf{(2019丘赛决赛)}设$A,B$为任意事件, 证明$\mathbb{P}(A\cup B)\mathbb{P}(A\cap B)\leq \mathbb{P}(A)\mathbb{P}(B)$.
+\end{example}
+\begin{proof}
+    \textbf{思路}: 对于集合的问题, 我们所能用到的处理工具是比较少的, 但通过引入示性函数的办法, 可以将集合问题转换成研究函数的问题, 进而利用数学期望与示性函数之间的关系, 转换成\textbf{积分不等式的估计问题}.\\
+    \textbf{解答}: 引入示性函数$I_A,I_B$, 有:
+    $$I_{A\cap B}=I_AI_B$$
+    $$I_{A\cup B}=I_A+I_B-I_AI_B$$
+    等价于证明:
+    $$\mathbb{E}(I_A+I_B-I_AI_B)\mathbb{E}(I_AI_B)\leq \mathbb{E}(I_A)\mathbb{E}(I_B)$$
+    再利用数学期望的线性性质, 整理得到:
+    $$\mathbb{E}(I_A(I_B-1))\mathbb{E}(I_B(I_A-1))\geq 0$$
+    而示性函数的取值只有0,1. 故上式显然成立.
+\end{proof}
 \section{协方差、相关系数}
 
 \section{条件数学期望}

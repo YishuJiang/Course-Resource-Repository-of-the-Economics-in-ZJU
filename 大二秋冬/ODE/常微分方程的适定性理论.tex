@@ -1,0 +1,88 @@
+\chapter{解的几何解释}
+
+\chapter{解的存在唯一性}
+首先给出本章的一些约定:$I\subset \mathbb{R}$是一个区间, $\Omega\subset \mathbb{R}^n$是一个区域.
+函数$f:I\times\Omega\to\mathbb{R}^n$是连续函数(这一要求是基于Riemann积分的,用来保证积分方程是可导的;如果是Lebesgue积分,则要求$f$是几乎处处连续的).\\
+初值问题(E):
+\begin{equation}
+    \begin{aligned}
+        \mathbf{y'} &=  \mathbf{f}(x,\mathbf{y}) \\
+        \mathbf{y}(x_0) &=  \mathbf{y_0}
+    \end{aligned}
+\end{equation}
+
+在这一章中, 最核心的定理是Picard存在唯一性定理, 表明如果$f$关于$y$是\textbf{Lip-连续}的, 则解在\textbf{局部}上存在唯一.其中有两点值得我们关注, 
+一个是Lip-连续, 这是一个相当强的条件, 类似与“可导”; 另一个是局部.很自然地, 我们要问: 如果弱化“Lip-连续”条件, 会得到什么?——于是有了Peano存在性定理和Osgood存在唯一性定理.
+如果扩充“局部”的结论, 这是否可行?——于是有了解的延伸定理; 更进一步地, 在延伸的基础上要估计解的最大存在区间——从而有了比较定理.
+
+在处理解的存在性问题时, 我们的基本思路是:\textbf{构造一族}$\{y_n(x)\}$\textbf{, 希望它能一致收敛到方程的解.}
+\section{Picard定理}
+首先定义Lipschitz条件:
+\begin{definition}{Lipschitz条件}
+    设函数$f(x,y)$在区域$\Omega$上满足:存在常数$L>0$,对于任意的$y_1,y_2\in\Omega$都有$\|f(x,y_1)-f(x,y_2)\|\leq L\|y_1-y_2\|$,
+    则称$f(x,y)$在$\Omega$上对$y$满足Lip-条件.
+\end{definition}
+同样地, 还可以定义局部Lip-条件, 只需要去掉$L$为“常数”的要求即可(换言之, 在区域内找不到一个统一的$L$使得均有Lip-条件成立); 之后会证明在有界闭集上局部Lip-条件与整体Lip-条件是等价的.
+特别地, 若$\Omega $是凸的有界闭区域, $f'_y$连续, 则$f$关于$y$满足Lip-条件.
+
+先给出标量情形的Picard定理; 对于向量值函数的版本, 通过定义适当的范数, 可以归结到标量情形.
+\begin{theorem}{Picard存在唯一定理}{}
+    若$f(x,y)$在矩形区域$R:|x-x_0|\leq a,|y-y_0|\leq b$上连续, 且关于$y$满足Lip-条件.则初值问题(E)在区间$[x_0-h,x_0+h]$上有且仅有一个解.其中$h=\min\{a,\frac{b}{M}\},M=\max_{(x,y)\in R}|f(x,y)|$.
+\end{theorem}
+\begin{proof}\newline
+    \textbf{Step1.}转化成等价的积分方程.\\
+    初值问题等价于
+    $$y(x)=y_0+\int_{x_0}^{x}f(s,y(s)){\rm d}s$$
+    (这样处理的好处在于: 积分方程在解连续时是自动满足可微性的条件的, 且包含了初值; 另外积分不等式相比微分不等式在估计上更加方便.)\\
+    以下说明等价性:
+    若$y(x)$连续, 则$f(x,y(x))$连续, 从而可知$y(x)$可微, 且$\frac{{\rm d}y}{{\rm d}x}=f(x,y(x)),y(x_0)=y_0$.
+    反之, 若$y=y(x)$是初值问题(E)的解, 从$x_0$到$x$积分, 有$y(x)-y_0=\int_{x_0}^{x}f(x,f(x)){\rm d}x$.
+    \\ \textbf{Step2.}构造Picard序列.\\
+    
+    构造如下Picard序列$\{y_n(x)\}_{n=0}^{\infty}$, 满足:
+    $$ \left\{
+    \begin{array}{ll}
+    y_n(x)=y_0+\int_{x_0}^{x}f(x,y_{n-1}(s)){\rm d}s \\
+    y_0(x_0) =  y_0
+    \end{array}
+    \right.
+    $$
+    (一致连续性如果成立, 这是非常好的性质, 它允许积分和极限换序, 从而可以由序列极限逼近方程的解.)\\
+    接着验证$|y_n(x)-y_0|\leq b,n=1,2,3,\cdots$, 采用数学归纳法:
+    $|y_1(x)-y_0|=|\int_{x_0}^xf(s,y_0)ds|\leq M|x-x_0|\leq M\cdot h\leq M\cdot b/M=b$
+    假设$|y_{n-1}(x)-y_0|\leq b$, 则$|y_{n}(x)-y_0|=|\int_{x_0}^{x}f(x,y_{n-1}(x)){\rm d}x|\leq M|x-x_0|\leq b$.
+    \\ \textbf{Step3.}说明Picard序列一致收敛.\\
+    注意到: 
+    $$y_n(x)=\sum_{j=0}^{n-1}(y_{j+1}(x)-y_{j}(x))+y_0(x)$$
+    要说明$\{y_n(x)\}$一致收敛, 只需说明$\sum_{j=0}^{\infty}(y_{j+1}(x)-y_{j}(x))$收敛.\\
+    对$|y_{j+1}(x)-y_j(x)|$进行估计:\\
+    $j=0$,$|y_{1}(x)-y_0|=|\int_{x_0}^{x}f(x,y_0){\rm d}x|\leq M|\int_{x_0}^x {\rm d}x|=M|x-x_0|$.\\
+    $j=1$,$|y_{2}(x)-y_1(x)|=|\int_{x_0}^{x}(f(x,y_1(x))-f(x,y_0)){\rm d}x|\leq \int_{x_0}^{x}L|(y_1(x)-y_0)|{\rm d}x\leq\int_{x_0}^{x}LM|x-x_0|{\rm d}x=\frac{1}{2}LM|x-x_0|^2$.\\
+    $j=2$,$|y_{3}(x)-y_{2}(x)|=|\int_{x_0}^{x}(f(x,y_2(x))-f(x,y_1(x))){\rm d}x|\leq \int_{x_0}^{x}L|(y_2(x)-y_1(x))|{\rm d}x\leq\int_{x_0}^{x}\frac{1}{2}L^2M|x-x_0|^2{\rm d}x=\frac{1}{6}L^2M|x-x_0|^3$.\\
+    一般地, 有$|y_{j+1}(x)-y_j(x)|\leq \frac{1}{(j+1)!}L^jM|x-x_0|^{j+1}=\frac{M}{L}\cdot\frac{(L|x-x_0|)^{j+1}}{(j+1)!}$.\\
+    故$|\sum_{j=0}^{\infty}(y_{j+1}(x)-y_{j}(x))|\leq\sum_{j=0}^{\infty}\frac{M}{L}\cdot\frac{(L|x-x_0|)^{j+1}}{(j+1)!}\leq\sum_{j=0}^{\infty}\frac{M}{L}\cdot\frac{(Lh)^{j+1}}{(j+1)!}<+\infty$.
+    从而$y_n(x)\rightrightarrows \varphi(x)\ on \ [x_0-h,x_0+h]$.\\
+    在Picard序列中, 令$n\to+\infty$, 有$\varphi(x)=y_0+\int_{x_0}^{x}f(x,\varphi(x)){\rm d}x$, 即$\varphi(x)$是Step1中积分方程的解, 也即初值问题(E)的解.
+    \\ \textbf{Step4.}证明解的唯一性.\\
+    (很经典的操作, 证明解的唯一性是Gronwall不等式的重要应用之一; 另外, 这里也正是Lip-条件保证了可以这么估计, 从而得到了唯一性)\\
+    设$y=\phi_1(x),y=\phi_2(x)$都是初值问题(E)的的解.令$\omega(x)=\phi_1(x)-\phi_2(x)$,则有
+    $$\begin{aligned}
+        \left| \frac{{\rm d}\omega}{{\rm d}x} \right| &= \left| \frac{{\rm d}\phi_1}{{\rm d}x} - \frac{{\rm d}\phi_2}{{\rm d}x} \right| \\
+        &= \left| (y_0 + \int_{x_0}^x f(x, \phi_1(x)) \, {\rm d}x) - (y_0 + \int_{x_0}^x f(x, \phi_2(x)) \, {\rm d}x) \right| \\
+        &= \left| \int_{x_0}^{x} (f(x, \phi_1(x)) - f(x, \phi_2(x))) \, {\rm d}x \right|\\
+        &\leq L|\int_{x_0}^x(\phi_1(x)-\phi_2(x)){\rm d}x|(\mathit{Lip})\\
+        &\leq L\int_{x_0}^{x}|\omega(x)|{\rm d}x
+        \end{aligned}
+    $$
+    由Gronwall不等式可知, $|\omega(x)|\leq 0$, 从而$\omega(x)\equiv 0$, 即解唯一.
+\end{proof}
+\section{Peano定理}
+\section{解的延伸定理}
+\section{比较定理}
+\newpage
+
+\chapter{解对初值和参数的依赖性}
+\section{解对初值和参数的连续依赖性}
+\section{解对初值和参数的连续可微性}
+
+\newpage
