@@ -1,0 +1,132 @@
+\chapter{动态随机一般均衡基础}
+本章介绍DSGE的一些基础知识, 包括集值映射、Bellman方程、最优化和动态规划等, 并简单介绍一下引入随机性(风险)的情形.主要参考书为《动态经济的递归方法》.
+同时为了写公式方便, 笔者这里在涉及到较多公式的区域时会直接写英语(\sout{也是在复刻邬sir的上课风格}).
+
+\section{集值映射}
+作为
+\section{Bellman方程}
+在之前的无穷期模型中, 我们已经接触到了Bellman方程, 通过迭代的方法求解无穷期的最优化问题, 从而有了Bellman方程.
+但Bellman方程的求解是相当困难的, 并且对于这样一个形式的方程, 我们在求解之前首先得讨论它的解的存在性和唯一性.
+\subsection{Bellman方程的基本形式}
+
+\subsection{预备概念与定理}
+{\kaishu 通过之前的讨论, Bellman方程的解定义在了函数空间上, 现在的目标是将$\mathbb{R}^n$上的性质相似地迁移到函数空间上.
+为此, 我们需要引入度量空间、收敛、完备性、压缩映射等概念.}
+\subsubsection{度量空间}
+首先我们给出度量的概念, 它用于刻画“距离”的概念.
+\begin{definition}{metric and metric space}
+    A Metric Space is a set $S$ and a function $d: S \times S \to \mathbb{R}$ such that for all $x, y, z \in S$:
+    \begin{enumerate}
+        \item $d(x, y) \geq 0$ (non-negativity) and $d(x, y) = 0 \iff x = y$ (identity of indiscernibles)
+        \item $d(x, y) = d(y, x)$ (symmetry)
+        \item $d(x, y) + d(y, z) \geq d(x, z)$ (triangle inequality)
+    \end{enumerate}
+    The function $d$ is called a metric.
+\end{definition}
+
+\begin{definition}{covegence}
+    A sequence $\{x_n\}$ in a metric space $(S, d)$ is said to converge to $x \in S$ if for every $\varepsilon > 0$, there exists an $N$ such that $d(x_n, x) < \varepsilon$ for all $n \geq N$.
+\end{definition}
+
+\begin{definition}{completeness}
+    A metric space $(S, d)$ is said to be complete if every Cauchy sequence in $S$ converges to a point in $S$. 
+    A sequence $\{x_n\}$ is said to be Cauchy if for every $\varepsilon > 0$, there exists an $N$ such that $d(x_n, x_m) \leq  \varepsilon$ for all $n, m \geq N$.
+\end{definition}
+\newpage
+
+\subsubsection{Banach空间与压缩映射定理}
+接着我们要更进一步, 刻画单个元素的“大小”. 为此我们引入范数的概念.
+\begin{definition}{norm and norm space}
+    A norm on a vector space $V$ is a function $\|\cdot\|: V \to \mathbb{R}$ such that for all $x, y \in V$ and $\alpha \in \mathbb{R}$:
+    \begin{enumerate}
+        \item $\|x\| \geq 0$ (non-negativity) and $\|x\| = 0 \iff x = 0$ (identity of indiscernibles)
+        \item $\|\alpha x\| = |\alpha| \|x\|$ (positive-homogeneity)
+        \item $\|x + y\| \leq \|x\| + \|y\|$ (triangle inequality)
+    \end{enumerate}
+\end{definition}
+以下是一些函数空间上一些常见的范数.
+\begin{itemize}
+    \item $L^p$范数:
+        $$\|f\|_p = \left(\int |f|^p dx\right)^{1/p}$$
+    \item $L^\infty$范数(又称无穷范数): 
+        $$\|f\|_\infty = \sup |f|$$
+    \item $L^2$范数(也就是常说的欧式范数): 
+        $$\|f\|_2 = \left(\int |f|^2 {\rm d}x\right)^{1/2}$$
+    \item $L^1$范数(俗称曼哈顿范数): $L^1$范数是定义在函数空间上的范数, 它的定义如下:
+        $$\|f\|_1 = \int |f| {\rm d}x$$
+\end{itemize}
+事实上, 我们可以用范数定义度量, 换言之, 赋范线性空间一定是度量空间.在赋范线性空间的基础上, 再加上完备性, 我们就得到了Banach空间.
+\begin{definition}{Banach space}
+    A Banach Space is a normed vector space that is complete with respect to the metric induced by the norm.
+\end{definition}
+Banach空间的性质相当优良, 对于压缩映射具有不动点定理, 可以用来证明存在唯一性
+(例如数学分析中的隐函数定理、ODE中的Picard定理, 都可以通过压缩映射定理加以证明).
+\begin{definition}{contraction mapping}
+    Let $(X,d)$ be a metric space.A mapping $T: X \to X$ is said to be a contraction if there exists a constant $0 < \beta < 1$ such that for all $x, y \in X$:
+    $$d(T(x),T(y)) \leq \beta d(x,y)$$
+    We call $\beta$ the moudel of $T$.
+\end{definition}
+压缩映射是一类特殊的映射, 随着迭代的进行 ,两个元素的相之间的“距离”会越来越小. 事实上, 可以看出它具有一致连续性.
+\begin{lemma}
+    Let $(S,d)$ be a metric space and $T:S\to S$ be a contraction mapping, then $T$ is uniformly continous. 
+\end{lemma}
+\begin{proof}
+    For any $\varepsilon>0$, let $\delta = \frac{\varepsilon}{\beta}$. 
+    Since $d(Tx,Ty)\leq \beta d(x,y)$, if $d(x,y)\leq \delta$, then $d(Tx,Ty)<\varepsilon$. 
+\end{proof}
+\newpage
+
+接下来给出本章最重要的一个定理, 正如书中所说的, 简洁且强大.
+\begin{theorem}{Banach fixed point theorem}
+    Let $(S,d)$ be a complete metric space and suppose $T:S\to S$ is a contraction mapping with moudle $\beta$. Then:
+    \begin{itemize}
+        \item the operator $T$ has excatly one fixed point $v^*\in S$.
+        \item For any $v_0\in S$ and for any $n\in\mathbb{N}$, $d(T^nv_0,v^*)\leq \beta^nd(v_0,v^*)$, that means for any $v_0\in S$ ,$\{T^nv_0\}_{n=0}^{\infty}$ converges to $v^*$.
+    \end{itemize}
+\end{theorem}
+\begin{proof}
+
+\end{proof}
+\newpage
+
+\subsubsection{函数空间的完备性和Blackwell定理}
+\textbf{当然, 如果我们要把Banach不动点定理用于解Bellman方程, 首先需要说明定义Bellman算子的函数空间是Banach空间; 其次还要说明Bellman算子是一个压缩映射.本节主要介绍解决这两个问题的两个定理.}
+\begin{theorem}{completeness of continuous-function space}
+    Let $X\subset \mathbb{R}^L$, $C(X)$ be the set of bounded continuous function $f:X\to\mathbb{R}$ with the sup-norm.
+    Then $(C(X),\|\cdot\|)$ is a Banach Space.
+\end{theorem}
+\begin{proof}
+    Let $\{f_n\}_{n=0}^{\infty}$ be a Cauchy Sequence i.e. for all $\varepsilon>0$, exists $N_\varepsilon\in\mathbb{N}$ such that 
+    $\|f_n-f\|=\sup_{x\in X}|f_n(x)-f_m(x)|\leq \varepsilon,\forall n,m\geq N_\varepsilon$.
+    We want to show that there exists a function $f\in C(X)$ such that $\|f_n-f\|\to 0$.
+    \begin{itemize}
+        \item Find the $f$.\\
+        Fixed $\bar{x}\in X$, we got a sequence $\{f_n(\bar{x})\}_{n=0}^{\infty}$.\\
+        Since $\{f_n\}_{n=0}^{\infty}$ is a Cauchy Sequence, for any $\varepsilon>0$, there exists $N_\varepsilon$ such that
+        $$|f_n(\bar{x})-f_m(\bar{x})|\leq \sup_{x\in X}|f_n(x)-f_m(x)|\leq \varepsilon,\forall n,m\geq N_\varepsilon$$
+        so the $\{f_n (\bar{x})\}_{n=0}^{\infty}$ is a Cauchy Sequence in $\mathbb{R}$, it converges to a limit $f(\bar{x})\in\mathbb{R}$.\\
+        Now, we define a function $f:X\to\mathbb{R}$, $f(x)=\lim_{n\to\infty}f_n(x),\forall x\in X$.
+        
+        \item Show that $\sup_{x\in X}|f_n(x)-f(x)|\to 0$.\\
+        We want to show that $\lim_{n\to\infty}\sup_{x\in X}|f_n(x)-f(x)|=0$ i.e. $\forall \varepsilon>0$, $\exists N_\varepsilon\in\mathbb{N}$ s.t. 
+        $\sup_{x\in X}|f_n(x)-f(x)|\leq \varepsilon,\forall n\geq N_\varepsilon$.
+        $$\sup_{x\in X}|f_n(x)-f(x)|=\sup_{x\in X}|(f_n(x)-f_m(x))+(f_m(x)-f(x))|\leq \sup_{x\in X}|f_n(x)-f_m(x)|+\sup_{x\in X}|f_m(x)-f(x)|$$
+        Since $\{f_n\}_{n=0}^{\infty}$ is a Cauchy Sequence, $\sup_{x\in X}|f_n(x)-f_m(x)|\to 0$;\\
+        Since $\{f_m(x)\}_{m=0}^{\infty}$ is a convergent sequence on $\mathbb{R}$ for any $x\in X$,with the definition of $f$, for any $m\to\infty$, $\sup_{x\in X}|f_m(x)-f(x)|\to 0$.\\
+        Then $\sup_{x\in X}|f_n(x)-f(x)|\to 0$.
+
+        \item Proof that $f\in C(X)$.\\
+        We need to proof that $f\in C(X)$ i.e. $f$ is a bounded continuous function.\\
+        Obviously, $f$ is bounded, Otherwise, $f_n$ could not be bounded due to  the covegence.\\
+        Besides, $|f(x)-f(x_0)|=|(f(x)-f_n(x))+(f_n(x)-f_n(x_0))+(f_n(x_0)-f(x_0))|\leq |(f(x)-f_n(x))|+|(f_n(x)-f_n(x_0))|+|(f_n(x_0)-f(x_0))|$\\
+        Since $f_n$ is continous, $|f_n(x)-f_n(x_0)|\to 0$; Since $\{f_n(x_0)\}$ converge to $f(x_0)$ (we have already proved it), $|f_n(x_0)-f(x_0)|\to 0$, similarly, $|f(x)-f_n(x)|\to 0$.
+
+    \end{itemize}
+\end{proof}
+\noindent 注:\\
+1. 证明完备性需要我们找到Cauchy列的极限, 我们的思路是先固定$x$, 通过实数的完备性得到点态收敛, 再证明在范数下函数收敛(事实上依此处定义的范数收敛等价于一致收敛).\\
+2. 从逻辑上来说, 到第二部分为止的证明是不够的, 因为我们没有证明$f\in C(X)$, 也就是说, $f$虽然满足了$\sup |f_n(x)-f(x)|$收敛到零, 但它还不是这个范数所作用的对象, 这一细节还需要进一步地证明.\\
+3. 更自然的想法可能会先证明$f\in C(X)$再证明$\|f_n-f\|\to 0 $, 但在这里有点反其道而行, 主要是为了得到更多的估计工具.\\
+4. 有人可能会困惑为什么这里多了有界的条件, 这主要是因为这儿没说$X$是紧集, 如果声明$X$是紧集的话, 有界性自动成立.
+\section{最优化工具}
+\section{马尔可夫过程}
