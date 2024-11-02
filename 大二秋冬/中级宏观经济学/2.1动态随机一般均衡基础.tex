@@ -1,9 +1,8 @@
 \chapter{动态随机一般均衡基础}
 本章介绍DSGE的一些基础知识, 包括集值映射、Bellman方程、最优化和动态规划等, 并简单介绍一下引入随机性(风险)的情形.主要参考书为《动态经济的递归方法》.
-同时为了写公式方便, 笔者这里在涉及到较多公式的区域时会直接写英语(\sout{也是在复刻邬sir的上课风格}).
+同时为了写公式方便, 笔者这里在涉及到较多公式的区域时会直接写英语(\sout{也是在复刻邬sir的上课风格, 绝对不是因为作者比较懒什么的}).
+\section{集值映射与最大值原理}
 
-\section{集值映射}
-作为
 \section{Bellman方程}
 在之前的无穷期模型中, 我们已经接触到了Bellman方程, 通过迭代的方法求解无穷期的最优化问题, 从而有了Bellman方程.
 但Bellman方程的求解是相当困难的, 并且对于这样一个形式的方程, 我们在求解之前首先得讨论它的解的存在性和唯一性.
@@ -64,7 +63,7 @@ Banach空间的性质相当优良, 对于压缩映射具有不动点定理, 可�
 \begin{definition}{contraction mapping}
     Let $(X,d)$ be a metric space.A mapping $T: X \to X$ is said to be a contraction if there exists a constant $0 < \beta < 1$ such that for all $x, y \in X$:
     $$d(T(x),T(y)) \leq \beta d(x,y)$$
-    We call $\beta$ the moudel of $T$.
+    We call $\beta$ the module of $T$.
 \end{definition}
 压缩映射是一类特殊的映射, 随着迭代的进行 ,两个元素的相之间的“距离”会越来越小. 事实上, 可以看出它具有一致连续性.
 \begin{lemma}
@@ -77,8 +76,9 @@ Banach空间的性质相当优良, 对于压缩映射具有不动点定理, 可�
 \newpage
 
 接下来给出本章最重要的一个定理, 正如书中所说的, 简洁且强大.
+注意这里只要是完备的度量空间即可, 因为只涉及到了"距离"的概念, 不用像书中强到Banach空间.
 \begin{theorem}{Banach fixed point theorem}
-    Let $(S,d)$ be a complete metric space and suppose $T:S\to S$ is a contraction mapping with moudle $\beta$. Then:
+    Let $(S,d)$ be a complete metric space and suppose $T:S\to S$ is a contraction mapping with module $\beta$. Then:
     \begin{itemize}
         \item the operator $T$ has excatly one fixed point $v^*\in S$.
         \item For any $v_0\in S$ and for any $n\in\mathbb{N}$, $d(T^nv_0,v^*)\leq \beta^nd(v_0,v^*)$, that means for any $v_0\in S$ ,$\{T^nv_0\}_{n=0}^{\infty}$ converges to $v^*$.
@@ -90,7 +90,7 @@ Banach空间的性质相当优良, 对于压缩映射具有不动点定理, 可�
 \newpage
 
 \subsubsection{函数空间的完备性和Blackwell定理}
-\textbf{当然, 如果我们要把Banach不动点定理用于解Bellman方程, 首先需要说明定义Bellman算子的函数空间是Banach空间; 其次还要说明Bellman算子是一个压缩映射.本节主要介绍解决这两个问题的两个定理.}
+\textbf{当然, 如果我们要把Banach不动点定理用于解Bellman方程, 首先需要说明定义Bellman算子的函数空间是完备的度量空间(当然按书中用sup-norm来诱导度量的话, 就可以得到一个Banach空间); 其次还要说明Bellman算子是一个压缩映射.本节主要介绍解决这两个问题的两个定理.}
 \begin{theorem}{completeness of continuous-function space}
     Let $X\subset \mathbb{R}^L$, $C(X)$ be the set of bounded continuous function $f:X\to\mathbb{R}$ with the sup-norm.
     Then $(C(X),\|\cdot\|)$ is a Banach Space.
@@ -127,6 +127,19 @@ Banach空间的性质相当优良, 对于压缩映射具有不动点定理, 可�
 1. 证明完备性需要我们找到Cauchy列的极限, 我们的思路是先固定$x$, 通过实数的完备性得到点态收敛, 再证明在范数下函数收敛(事实上依此处定义的范数收敛等价于一致收敛).\\
 2. 从逻辑上来说, 到第二部分为止的证明是不够的, 因为我们没有证明$f\in C(X)$, 也就是说, $f$虽然满足了$\sup |f_n(x)-f(x)|$收敛到零, 但它还不是这个范数所作用的对象, 这一细节还需要进一步地证明.\\
 3. 更自然的想法可能会先证明$f\in C(X)$再证明$\|f_n-f\|\to 0 $, 但在这里有点反其道而行, 主要是为了得到更多的估计工具.\\
-4. 有人可能会困惑为什么这里多了有界的条件, 这主要是因为这儿没说$X$是紧集, 如果声明$X$是紧集的话, 有界性自动成立.
-\section{最优化工具}
+4. 有人可能会困惑为什么这里多了有界的条件, 这主要是因为这儿没说$X$是紧集, 如果声明$X$是紧集的话, 有界性自动成立.\\
+5. 使用压缩映射定理只要在完备度量空间就够了, 但这里定义的范数性质比较好, 所以我们可以得到一个Banach空间.\\
+
+在使用Banach不动点定理之前, 我们得先验证Bellman算子是一个压缩映射, 证明压缩映射一般会用到各种不等式, 但由于Bellman算子比较特别, 用不等式很难对其估计, 我们需要开辟新的方法.这里给出验证函数是压缩映射的一个定理——Blackwell定理.
+\begin{theorem}{Blackwell Theorem}
+    Let $X\subset\mathbb{R}^L$ and $C(X)$ be the set of bounded continuous function $f:X\to\mathbb{R}$ with the sup-norm.
+    Let $T:C(X)\to C(X)$ be a operator satisfying:
+    \begin{itemize}
+        \item Monotoniacity: $f\geq g\Rightarrow Tf\geq Tg$ for all $f,g\in C(X)$;
+        \item Discounting: Let the function $f+a$ for $f\in C(X)$ and $a\in\mathbb{R}^n_+$ defined by $(f+a)(x)=f(x)+a$.There exists a $\beta\in(0,1)$ such that for all $f\in C(X)$,$a\geq 0$ and all $x\in X$, $[T(f+a)(x)]\leq [Tf](x)+\beta a$.
+    \end{itemize}
+   If these two conditions are satisfied, then $T$ is a contraction mapping with module $\beta$.
+\end{theorem}
+
 \section{马尔可夫过程}
+这里讨论引入风险(随机性)的情形.
